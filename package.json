@@ -1,0 +1,19 @@
+{
+  "name": "data-structure",
+  "version": "1.0.0",
+  "description": "data structures",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node index.ts"
+  },
+  "author": "Ricardo Borges",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "prettier": "^2.3.0",
+    "ts-node": "^10.0.0"
+  }
+}
