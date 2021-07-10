@@ -28,7 +28,7 @@ export class Node<T> {
   }
 }
 
-class Graph<T> {
+export class Graph<T> {
   nodes: Map<T, Node<T>> = new Map();
   comparator: (a: T, b: T) => number;
 
@@ -108,17 +108,25 @@ class Graph<T> {
    * @param {Map<T, boolean>} visited
    * @returns
    */
-  depthFirstSearch(data: T, visited: Map<T, boolean> = new Map()): void {
-    const node = this.nodes.get(data);
-
+  private depthFirstSearchAux(node: Node<T>, visited: Map<T, boolean>): void {
     if (!node) return;
 
-    console.log(node.data);
     visited.set(node.data, true);
+
+    console.log(node.data);
 
     node.adjacent.forEach((item) => {
       if (!visited.has(item.data)) {
-        this.depthFirstSearch(item.data, visited);
+        this.depthFirstSearchAux(item, visited);
+      }
+    });
+  }
+
+  depthFirstSearch() {
+    const visited: Map<T, boolean> = new Map();
+    this.nodes.forEach((node) => {
+      if (!visited.has(node.data)) {
+        this.depthFirstSearchAux(node, visited);
       }
     });
   }
@@ -129,11 +137,8 @@ class Graph<T> {
    * @param {T} data
    * @returns
    */
-  breadthFirstSearch(data: T): void {
-    const visited: Map<T, boolean> = new Map();
+  private breadthFirstSearchAux(node: Node<T>, visited: Map<T, boolean>): void {
     const queue: Queue<Node<T>> = new Queue();
-
-    let node = this.nodes.get(data);
 
     if (!node) return;
 
@@ -155,6 +160,15 @@ class Graph<T> {
       });
     }
   }
+
+  breadthFirstSearch() {
+    const visited: Map<T, boolean> = new Map();
+    this.nodes.forEach((node) => {
+      if (!visited.has(node.data)) {
+        this.breadthFirstSearchAux(node, visited);
+      }
+    });
+  }
 }
 
 function comparator(a: number, b: number) {
@@ -175,9 +189,13 @@ const n5 = graph.addNode(5);
 // graph.addNode(2);
 
 graph.addEdge(n1.data, n2.data);
-graph.addEdge(n2.data, n3.data);
-graph.addEdge(n1.data, n4.data);
-graph.addEdge(n4.data, n5.data);
+graph.addEdge(n1.data, n3.data);
+graph.addEdge(n2.data, n4.data);
+graph.addEdge(n3.data, n4.data);
+// graph.addEdge(n4.data, n5.data);
+
+graph.breadthFirstSearch();
+// graph.depthFirstSearch();
 
 // console.log(graph.nodes.get(1));
 
@@ -193,4 +211,4 @@ graph.addEdge(n4.data, n5.data);
 // graph.printAllNodes();
 
 // graph.depthFirstSearch(n1.data);
-graph.breadthFirstSearch(n1.data);
+// graph.breadthFirstSearch(n1.data);

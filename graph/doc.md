@@ -1,12 +1,10 @@
-## Data Structures in Typescript - Graph
-
-Graph is data structure that consists of vertices (or node) that can be connected to other vertices by edges.
+The graph is a data structure that consists of vertices (or nodes) that can be connected to other vertices by edges.
 
 ![graph](https://res.cloudinary.com/dje4crtui/image/upload/v1623451532/data%20structures/graph_1_w9efdw.png)
 
-The **degree** is the number of edges that are connected to a vertex, for example the vertex **A** has a degree of **1** and the vertex **C** has a degree of 2.
+The **degree** is the number of edges that are connected to a vertex, for example, the vertex **A** has a degree of **1** and the vertex **C** has a degree of 2.
 
-Graphs can either directed or undirected, directed graphs are like a one-way-street, undirected are like a two-way-street.
+Graphs can be either directed or undirected, directed graphs are like a one-way street, undirected is like a two-way street.
 
 ![directed and undirected graphs](https://res.cloudinary.com/dje4crtui/image/upload/v1623367833/data%20structures/graph_2_tzprzz.png)
 
@@ -14,7 +12,7 @@ Graphs can also have cycles.
 
 ![cyclic and acyclic graphs](https://res.cloudinary.com/dje4crtui/image/upload/v1623367833/data%20structures/graph_3_v0zmhu.png)
 
-Graphs might be a disconnected one, that means it consist of isolated subgraphs, or a connected one, in which all every pair of nodes are connected by an edge.
+Graphs might be a disconnected one, that means it consists of isolated subgraphs, or a connected one, in which all every pair of nodes are connected by an edge.
 
 ![connected and disconnected graphs](https://res.cloudinary.com/dje4crtui/image/upload/v1623367833/data%20structures/graph_4_eujwdh.png)
 
@@ -22,9 +20,9 @@ Graphs can be used to represent networks, websites structure, also used in path 
 
 ### Representation
 
-Graphs can represented with
+Graphs can be represented with
 
-- **Adjacency list** - Every node stores a list of adjacent vertices, for example, an array or that contains all vertices and each vertex contains a another array with adjacent vertices, other data structures can be used instead of an array, like a hash table and a linked list.
+- **Adjacency list** - Every node stores a list of adjacent vertices, for example, an array or that contains all vertices and each vertex contains another array with adjacent vertices, other data structures can be used instead of an array, like a hash table and a linked list.
 
 - **Adjacency matrix** - An NxN boolean matrix (where N is the number of vertices), if the matrix[i][j] stores the value true, there is a connection between the vertices i and j. In an undirected graph matrix[j][i] also will store the value true. You can use other types instead of boolean, for example, numbers to represent weight.
 
@@ -34,23 +32,23 @@ Graphs can represented with
 
 #### Depth-first search
 
-Depth-first search is a way to navigate a graph, it starts from a given vertex and visit each branch completely before move to another branch. DFS is often used when we need to visit every node in the graph.
+Depth-first search is a way to navigate a graph, it starts from a given vertex and visits each branch completely before moving to another branch. DFS is often used when we need to visit every node in the graph.
 
 ![graph depth-first search](https://res.cloudinary.com/dje4crtui/image/upload/v1623451532/data%20structures/graph_6_pr8wqq.png)
 
-Using DPS on the graph above the nodes will visited in the following order: A, B, D, C, E, F.
+Using DPS on the graph above the nodes will be visited in the following order: A, B, D, C, E, F.
 
 #### Breadth-first search
 
-This is another way to navigate a graph, it starts from a given vertex and visit all adjacent vertices before go to any of their children. BFS is useful to find a path between two nodes.
+This is another way to navigate a graph, it starts from a given vertex and visits all adjacent vertices before go to any of their children. BFS is useful to find a path between two nodes.
 
 ![graph breadth-first search](https://res.cloudinary.com/dje4crtui/image/upload/v1623451532/data%20structures/graph_6_pr8wqq.png)
 
-Using DPS on the graph above the nodes will visited in the following order: A, B, E, F, D, C.
+Using DPS on the graph above the nodes will be visited in the following order: A, B, E, F, D, C.
 
 #### Bidirectional search
 
-Consists of running two breadth-first search simultaneously, each one start from a different vertex and run until they collide. This is useful to find the shortest path between two vertices.
+Consists of running two breadth-first searches simultaneously, each one starts from a different vertex and runs until they collide. This is useful to find the shortest path between two vertices.
 
 ![Bidirectional search](https://res.cloudinary.com/dje4crtui/image/upload/v1623452079/data%20structures/graph_7_yzwhhf.png)
 
@@ -165,17 +163,25 @@ class Graph<T> {
    * @param {Map<T, boolean>} visited
    * @returns
    */
-  depthFirstSearch(data: T, visited: Map<T, boolean> = new Map()): void {
-    const node = this.nodes.get(data);
-
+  private depthFirstSearchAux(node: Node<T>, visited: Map<T, boolean>): void {
     if (!node) return;
 
-    console.log(node.data);
     visited.set(node.data, true);
+
+    console.log(node.data);
 
     node.adjacent.forEach((item) => {
       if (!visited.has(item.data)) {
-        this.depthFirstSearch(item.data, visited);
+        this.depthFirstSearchAux(item, visited);
+      }
+    });
+  }
+
+  depthFirstSearch() {
+    const visited: Map<T, boolean> = new Map();
+    this.nodes.forEach((node) => {
+      if (!visited.has(node.data)) {
+        this.depthFirstSearchAux(node, visited);
       }
     });
   }
@@ -186,11 +192,8 @@ class Graph<T> {
    * @param {T} data
    * @returns
    */
-  breadthFirstSearch(data: T): void {
-    const visited: Map<T, boolean> = new Map();
+  private breadthFirstSearchAux(node: Node<T>, visited: Map<T, boolean>): void {
     const queue: Queue<Node<T>> = new Queue();
-
-    let node = this.nodes.get(data);
 
     if (!node) return;
 
@@ -198,7 +201,7 @@ class Graph<T> {
     visited.set(node.data, true);
 
     while (!queue.isEmpty()) {
-      node = queue.remove(); // dequeue
+      node = queue.remove();
 
       if (!node) continue;
 
@@ -207,10 +210,19 @@ class Graph<T> {
       node.adjacent.forEach((item) => {
         if (!visited.has(item.data)) {
           visited.set(item.data, true);
-          queue.add(item); // enqueue
+          queue.add(item);
         }
       });
     }
+  }
+
+  breadthFirstSearch() {
+    const visited: Map<T, boolean> = new Map();
+    this.nodes.forEach((node) => {
+      if (!visited.has(node.data)) {
+        this.breadthFirstSearchAux(node, visited);
+      }
+    });
   }
 }
 
