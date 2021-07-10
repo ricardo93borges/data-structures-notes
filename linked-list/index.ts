@@ -1,4 +1,4 @@
-class LinkedListNode<T> {
+export class LinkedListNode<T> {
   data: T;
   next: LinkedListNode<T> | null = null;
 
@@ -7,7 +7,7 @@ class LinkedListNode<T> {
   }
 }
 
-class LinkedList<T> {
+export class LinkedList<T> {
   head: LinkedListNode<T> | null = null;
   comparator: (a: T, b: T) => boolean;
 
@@ -84,7 +84,7 @@ class LinkedList<T> {
 
 //
 
-const linkedList = new LinkedList((a: number, b: number) => a === b);
+/* const linkedList = new LinkedList((a: number, b: number) => a === b);
 
 linkedList.append(1);
 linkedList.append(2);
@@ -98,7 +98,7 @@ linkedList.traverse();
 linkedList.delete(4);
 
 console.log(" --- ");
-linkedList.traverse();
+linkedList.traverse(); */
 /*
 console.log(" --- ");
 linkedList.traverse();
