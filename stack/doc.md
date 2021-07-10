@@ -1,7 +1,9 @@
 ## Data Structures in Typescript - Stack
 
 A stack uses LIFO (last-in-first-out) ordering, the most recent item added is the first item to be removed, just like a real stack.
-Some uses of this data structure are expressions evaluations and conversion (prefix, postfix and infix), backtracking and memory management.
+Some uses of this data structure are expressions evaluations and conversion (prefix, postfix, and infix), backtracking, and memory management.
+
+![stack](https://res.cloudinary.com/dje4crtui/image/upload/v1622906576/data%20structures/stack_rccvuz.png)
 
 ### Representation
 
@@ -15,7 +17,7 @@ A stack can be implemented using an array or a linked list, can be either fixed 
 - **isEmpty** - Return true if the stack is empty.
 - **isFull** - Return true if the stack is full, used when the stack is fixed size.
 
-Heres a implementation of a stack using an array, in Typescript an array doesn't have a fixed length, so the operation **isFull** is not required, however you can implement a stack with fixed length and use that operation.
+Here's an implementation of a stack using an array, in Typescript an array doesn't have a fixed length, so the operation **isFull** is not required, however you can implement a stack with a fixed length and use that operation.
 
 ```typescript
 class Stack<T> {
