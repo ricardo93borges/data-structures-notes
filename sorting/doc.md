@@ -35,7 +35,7 @@ bubbleSort(arr);
 console.log(arr);
 ```
 
-Since its complexity is $Ο(n^2)$ on average and worst cases, this algorithm is more suitable for small or nearly ordered data sets.
+Since its time complexity is $Ο(n^2)$ on average and worst cases, this algorithm is more suitable for small or nearly ordered data sets.
 
 ### Selection Sort
 
@@ -59,7 +59,7 @@ function selectionSort(arr: number[]) {
 }
 ```
 
-Like Bubble Sort, this algorithm has a quadratic complexity $Ο(n^2)$, so it is also more suitable for small or nearly ordered data sets. However, Selection Sort performs fewer swaps than Bubble Sort.
+Like Bubble Sort, this algorithm has a quadratic time complexity $Ο(n^2)$, so it is also more suitable for small or nearly ordered data sets. However, Selection Sort performs fewer swaps than Bubble Sort.
 
 ### Insertion Sort
 
@@ -82,4 +82,4 @@ function insertionSort(arr: number[]) {
 }
 ```
 
-Insertion sort has a quadratic complexity for average and worst cases too, however, it's the fastest sorting algorithm for small lists.
+Insertion sort has a quadratic time complexity for average and worst cases too, however, it's the fastest sorting algorithm for small lists.
