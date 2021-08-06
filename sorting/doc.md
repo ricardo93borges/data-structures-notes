@@ -39,7 +39,7 @@ Since its complexity is $Ο(n^2)$ on average and worst cases, this algorithm is 
 
 ### Selection Sort
 
-The list is divided into a sorted part at the left and an unsorted part at the right in this algorithm. Initially, the sorted sublist is empty and the unsorted one is all the list. Then it searches for the smallest element in the unsorted sublist and swaps it with the leftmost sorted element, moving the sublist boundaries one element to the right.
+The list is divided into a sorted part at the left and an unsorted part at the right in this algorithm. Initially, the sorted sublist is empty and the unsorted one is all the list. Then it searches for the smallest element in the unsorted sublist and swaps it with the leftmost unsorted element, moving the sublist boundaries one element to the right.
 
 ![selection sort](https://res.cloudinary.com/dje4crtui/image/upload/v1627934933/algorithms/sorting/selection-sort_limbbw.gif)
 
