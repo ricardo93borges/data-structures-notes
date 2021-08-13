@@ -1,6 +1,4 @@
-function swap(arr: number[], i: number, j: number) {
-  [arr[i], arr[j]] = [arr[j], arr[i]];
-}
+import { swap } from "../utils/swap";
 
 function bubbleSort(arr: number[]) {
   for (let i = 0; i < arr.length - 1; i++) {

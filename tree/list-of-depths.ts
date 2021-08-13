@@ -1,8 +1,6 @@
 import { BinarySearchTree, BinarySearchTreeNode } from ".";
 import { LinkedList } from "../linked-list/index";
 
-debugger;
-
 function listOfDepths(
   node: BinarySearchTreeNode<number>,
   hashMap: Map<number, LinkedList<number>>,
@@ -15,10 +13,10 @@ function listOfDepths(
     hashMap.set(level, list);
   }
 
-  hashMap.get(level).append(node.data);
+  hashMap.get(level)!.append(node.data);
 
-  listOfDepths(node.leftNode, hashMap, level + 1);
-  listOfDepths(node.rightNode, hashMap, level + 1);
+  listOfDepths(node.leftNode!, hashMap, level + 1);
+  listOfDepths(node.rightNode!, hashMap, level + 1);
 }
 
 function comparator(a: number, b: number) {
@@ -43,5 +41,5 @@ bst.insert(8);
 bst.preOrderTraversal(bst.root);
 
 const hashMap = new Map<number, LinkedList<number>>();
-listOfDepths(bst.root, hashMap, 0);
+listOfDepths(bst.root!, hashMap, 0);
 console.log(hashMap);

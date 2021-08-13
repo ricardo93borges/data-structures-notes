@@ -1,13 +1,11 @@
 function merge(left: number[], right: number[]): number[] {
-  console.log("a", left);
-  console.log("b", right);
   const sorted = [];
 
   while (left.length && right.length) {
     if (left[0] < right[0]) {
-      sorted.push(left.shift());
+      sorted.push(left.shift() as number);
     } else {
-      sorted.push(right.shift());
+      sorted.push(right.shift() as number);
     }
   }
 

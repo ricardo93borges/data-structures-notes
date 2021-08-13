@@ -62,7 +62,7 @@ export function run() {
  */
   // console.log(graph.nodes);
 
-  const order = [];
+  const order: number[] = [];
   const visited = new Map();
 
   // handle disconnected graphs

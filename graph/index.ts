@@ -146,7 +146,7 @@ export class Graph<T> {
     visited.set(node.data, true);
 
     while (!queue.isEmpty()) {
-      node = queue.remove();
+      node = queue.remove() as Node<T>;
 
       if (!node) continue;
 

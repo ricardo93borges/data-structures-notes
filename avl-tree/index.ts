@@ -26,32 +26,36 @@ export class AVLTree<T> {
     return node ? this.getHeight(node.left) - this.getHeight(node.right) : 0;
   }
 
-  rightRotate(node: AVLTreeNode<T>): AVLTreeNode<T> {
+  rightRotate(node?: AVLTreeNode<T>): AVLTreeNode<T> | undefined {
+    if (!node) return;
+
     let left = node.left;
     let right = node.right;
 
-    left.right = node;
+    left!.right = node;
     node.left = right;
 
     node.height =
       1 + Math.max(this.getHeight(node.left), this.getHeight(node.right));
-    left.height =
-      1 + Math.max(this.getHeight(left.left), this.getHeight(left.right));
+    left!.height =
+      1 + Math.max(this.getHeight(left!.left), this.getHeight(left!.right));
 
     return left;
   }
 
-  leftRotate(node: AVLTreeNode<T>): AVLTreeNode<T> {
+  leftRotate(node?: AVLTreeNode<T>): AVLTreeNode<T> | undefined {
+    if (!node) return;
+
     let left = node.left;
     let right = node.right;
 
-    right.left = node;
+    right!.left = node;
     node.right = left;
 
     node.height =
       1 + Math.max(this.getHeight(node.left), this.getHeight(node.right));
-    right.height =
-      1 + Math.max(this.getHeight(right.left), this.getHeight(right.right));
+    right!.height =
+      1 + Math.max(this.getHeight(right!.left), this.getHeight(right!.right));
 
     return right;
   }
@@ -87,23 +91,23 @@ export class AVLTree<T> {
 
     const balance = this.getHeight(parent);
 
-    if (balance > 1 && data < parent.left?.data) {
+    if (balance > 1 && data < parent!.left!.data) {
       return this.rightRotate(parent);
     }
 
     // Right Right Case
-    if (balance < -1 && data > parent.right?.data) {
+    if (balance < -1 && data > parent!.right!.data) {
       return this.leftRotate(parent);
     }
 
     // Left Right Case
-    if (balance > 1 && data > parent.left?.data) {
+    if (balance > 1 && data > parent!.left!.data) {
       parent.left = this.leftRotate(parent.left);
       return this.rightRotate(parent);
     }
 
     // Right Left Case
-    if (balance < -1 && data < parent.right?.data) {
+    if (balance < -1 && data < parent!.right!.data) {
       parent.right = this.rightRotate(parent.right);
       return this.leftRotate(parent);
     }

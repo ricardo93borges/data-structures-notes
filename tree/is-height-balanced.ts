@@ -1,25 +1,25 @@
 import { BinarySearchTree, BinarySearchTreeNode } from ".";
 
-function getHeight(node?: BinarySearchTreeNode<number>): number {
+/* function getHeight(node?: BinarySearchTreeNode<number>): number {
   if (!node) return 0;
 
   return 1 + Math.max(getHeight(node.leftNode), getHeight(node.rightNode));
-}
+} */
 
-function isHeightBalanced(node: BinarySearchTreeNode<number>): boolean {
+/* function isHeightBalanced(node: BinarySearchTreeNode<number>): boolean {
   if (!node) return true;
 
   if (Math.abs(getHeight(node.leftNode) - getHeight(node.rightNode)) > 1)
     return false;
 
   return isHeightBalanced(node.leftNode) && isHeightBalanced(node.rightNode);
-}
+} */
 
 function checkHeight(node: BinarySearchTreeNode<number>): number {
   if (!node) return -1;
 
-  const leftHeight = checkHeight(node.leftNode);
-  const rightHeight = checkHeight(node.rightNode);
+  const leftHeight = checkHeight(node.leftNode!);
+  const rightHeight = checkHeight(node.rightNode!);
 
   const heightDiff = Math.abs(leftHeight - rightHeight);
   if (heightDiff > 1) {
@@ -53,5 +53,5 @@ export function run() {
   bst.insert(10);
 
   // console.log(isHeightBalanced(bst.root));
-  console.log(checkHeight(bst.root));
+  console.log(checkHeight(bst.root!));
 }

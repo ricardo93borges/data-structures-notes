@@ -1,6 +1,6 @@
 import { BinarySearchTree, BinarySearchTreeNode } from ".";
 
-function isBST(node: BinarySearchTreeNode<number>, min: number, max: number) {
+function isBST(node: BinarySearchTreeNode<number>, min?: number, max?: number) {
   if (!node) return true;
 
   if ((min && node.data <= min) || (max && node.data > max)) {
@@ -8,8 +8,8 @@ function isBST(node: BinarySearchTreeNode<number>, min: number, max: number) {
   }
 
   if (
-    !isBST(node.leftNode, min, node.data) ||
-    !isBST(node.rightNode, node.data, max)
+    !isBST(node.leftNode!, min, node.data) ||
+    !isBST(node.rightNode!, node.data, max)
   ) {
     return false;
   }
@@ -39,7 +39,7 @@ export function run() {
   bst.insert(8);
   bst.insert(9);
 
-  console.log(isBST(bst.root, null, null));
+  console.log(isBST(bst.root!));
 }
 
 run();

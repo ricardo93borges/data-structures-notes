@@ -6,7 +6,7 @@ function reverse(linkedList: LinkedList<number>) {
   let next = linkedList.head;
 
   while (current !== null) {
-    next = next.next;
+    next = next!.next;
     current.next = prev;
     prev = current;
     current = next;
